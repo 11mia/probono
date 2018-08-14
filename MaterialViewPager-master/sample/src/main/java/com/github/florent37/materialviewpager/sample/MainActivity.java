@@ -17,6 +17,9 @@ import com.github.florent37.materialviewpager.MaterialViewPager;
 import com.github.florent37.materialviewpager.header.HeaderDesign;
 import com.github.florent37.materialviewpager.sample.fragment.RecyclerViewFragment;
 import com.github.florent37.materialviewpager.sample.fragment.SettingsFragment;
+import com.github.florent37.materialviewpager.sample.fragment.coFragment;
+import com.github.florent37.materialviewpager.sample.fragment.purseFragment;
+import com.github.florent37.materialviewpager.sample.fragment.xiroFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,12 +49,17 @@ public class MainActivity extends DrawerActivity {
                 switch (position % 4) {
                     case 0:
                        return SettingsFragment.newInstance();
+                    case 1:
+                        return purseFragment.newInstance();
+                    case 2:
+                        return coFragment.newInstance();
+
                     //case 1:
                     //    return RecyclerViewFragment.newInstance();
                     //case 2:
                     //    return WebViewFragment.newInstance();
                     default:
-                        return RecyclerViewFragment.newInstance();
+                        return xiroFragment.newInstance();
                 }
             }
 
@@ -64,13 +72,13 @@ public class MainActivity extends DrawerActivity {
             public CharSequence getPageTitle(int position) {
                 switch (position % 4) {
                     case 0:
-                        return "Settings";
+                        return "Information";
                     case 1:
-                        return "Actualités";
+                        return "Purse";
                     case 2:
-                        return "Professionnel";
+                        return "co";
                     case 3:
-                        return "Divertissement";
+                        return "xiro";
                 }
                 return "";
             }
