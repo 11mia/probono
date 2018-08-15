@@ -40,7 +40,7 @@ public class xiroAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         switch (viewType) {
             case TYPE_HEADER: {
                 view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.fragment_settings, parent, false);
+                        .inflate(R.layout.fragment_xiro, parent, false);
                 return new RecyclerView.ViewHolder(view) {
                 };
             }

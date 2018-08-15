@@ -40,7 +40,7 @@ public class purseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         switch (viewType) {
             case TYPE_HEADER: {
                 view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.fragment_settings, parent, false);
+                        .inflate(R.layout.fragment_purse, parent, false);
                 return new RecyclerView.ViewHolder(view) {
                 };
             }

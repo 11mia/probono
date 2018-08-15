@@ -1,5 +1,6 @@
 package com.github.florent37.materialviewpager.sample.fragment;
 
+import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.location.SettingInjectorService;
 import android.os.Bundle;
@@ -10,7 +11,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.florent37.materialviewpager.header.MaterialViewPagerHeaderDecorator;
 import com.github.florent37.materialviewpager.sample.R;
@@ -27,6 +30,7 @@ public class SettingsFragment extends Fragment {
 
     private static final boolean GRID_LAYOUT = false;
     private static final int ITEM_COUNT = 1;
+    Button editbutton;
 
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
@@ -36,8 +40,12 @@ public class SettingsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_recyclerview, container, false);
+        View view = null;
+        view = inflater.inflate(R.layout.fragment_recyclerview, container, false);
+
+       // return inflater.inflate(R.layout.fragment_recyclerview, container, false);
         //return super.onCreateView(inflater, container, savedInstanceState);
+        return view;
     }
 
     @Override
@@ -62,5 +70,14 @@ public class SettingsFragment extends Fragment {
         //Use this now
         mRecyclerView.addItemDecoration(new MaterialViewPagerHeaderDecorator());
         mRecyclerView.setAdapter(new SettingsAdapter(items));
+       /* editbutton = (Button)mRecyclerView.findViewById(R.id.edit);
+        editbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Activity root = getActivity();
+                Toast.makeText(root,"hello!",Toast.LENGTH_LONG).show();
+
+            }
+        });*/
     }
 }
