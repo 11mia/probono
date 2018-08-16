@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.NumberPicker;
 import android.widget.Toast;
 
 import java.util.List;
@@ -76,6 +77,19 @@ public class SettingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("AlertDialog Title");
         builder.setMessage("AlertDialog Content");
+
+        LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View infoFormView = inflater.inflate(R.layout.activity_alert_dialog_information, null);
+
+        //NumberPicker for Age 0~150
+        NumberPicker np = (NumberPicker) infoFormView.findViewById(R.id.picker);
+        np.setMinValue(1);
+        np.setMaxValue(150);
+        np.setValue(25);
+        np.setWrapSelectorWheel(false);
+
+        builder.setView(infoFormView);
+
         builder.setPositiveButton("예",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
