@@ -1,5 +1,6 @@
 package com.github.florent37.materialviewpager.sample;
 
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -30,15 +31,16 @@ import butterknife.ButterKnife;
 import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends DrawerActivity {
-
+    static Variable variable;
     @BindView(R.id.materialViewPager)
-    MaterialViewPager mViewPager;
+     MaterialViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Intent intent = getIntent();
+        variable =(Variable)getApplication();
 
         setTitle("");
         ButterKnife.bind(this);
@@ -49,6 +51,13 @@ public class MainActivity extends DrawerActivity {
         }
 
         mViewPager.getViewPager().setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
+
+            @Override
+            public int getItemPosition(Object object) {
+                    return POSITION_NONE;
+
+            }
+
 
             @Override
             public Fragment getItem(int position) {
@@ -88,6 +97,8 @@ public class MainActivity extends DrawerActivity {
                 }
                 return "";
             }
+
+
         });
 
         mViewPager.setMaterialViewPagerListener(new MaterialViewPager.Listener() {
@@ -118,9 +129,10 @@ public class MainActivity extends DrawerActivity {
             }
         });
 
+
+
         mViewPager.getViewPager().setOffscreenPageLimit(mViewPager.getViewPager().getAdapter().getCount());
         mViewPager.getPagerTitleStrip().setViewPager(mViewPager.getViewPager());
-
         final View logo = findViewById(R.id.logo_white);
         if (logo != null) {
             logo.setOnClickListener(new View.OnClickListener() {
@@ -163,4 +175,12 @@ public class MainActivity extends DrawerActivity {
             }
         }
     }
+    public static Variable getapplication() {
+        return variable;
+    }
+    public void refresh(){
+        mViewPager.getViewPager().getAdapter().notifyDataSetChanged();
+    }
+
+
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- array의 이름은 location 입니다.-->
+
+    <string-array name="location">
+        <item>서울</item>
+        <item>인천</item>
+        <item>대전</item>
+        <item>부산</item>
+        <item>제주</item>
+    </string-array>
+
+</resources>
+
+

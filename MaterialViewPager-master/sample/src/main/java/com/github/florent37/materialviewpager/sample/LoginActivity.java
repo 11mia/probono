@@ -30,11 +30,13 @@ public class LoginActivity extends AppCompatActivity {
         final TextView tvRegisterLink = (TextView) findViewById(R.id.tvRegisterLink);
         final Button bLogin = (Button) findViewById(R.id.bSignIn);
 
+
         tvRegisterLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
                 LoginActivity.this.startActivity(registerIntent);
+                finish();
             }
         });
 
@@ -51,13 +53,27 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             JSONObject jsonResponse = new JSONObject(response);
                             boolean success = jsonResponse.getBoolean("success");
-                            Log.v("LoginActivity","LoginSuccess");
 
                             if (success) {
+                                Log.v("LoginActivity","LoginSuccess");
+                                String name = jsonResponse.getString("name");
+                                int age = jsonResponse.getInt("age");
+                                String username = jsonResponse.getString("username");
+                                String aduino_id = jsonResponse.getString("aduino_id");
+                                String sex=jsonResponse.getString("sex");
+                                Variable variable=(Variable)getApplication();
+                                variable.setName(name);
+                                variable.setUsername(username);
+                                variable.setAge(age);
+                                variable.setAduino_id(aduino_id);
+                                variable.setSex(sex);
+                                //Toast.makeText(LoginActivity.this, variable.getName()+"   "+variable.getUsername()+"   "+variable.getAduino_id()+"   "+Integer.toString(variable.getAge()), Toast.LENGTH_LONG).show();
+                                //Toast.makeText(LoginActivity.this,username+"    "+name+"    "+Integer.toString(age),Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 LoginActivity.this.startActivity(intent);
                                 Toast toast = new Toast(LoginActivity.this);
                                 toast.makeText(LoginActivity.this,"welcome!",Toast.LENGTH_LONG).show();
+                                finish();
                             } else {
                                 Log.v("LoginActivity","LoginFailed");
                                 Toast toast = new Toast(LoginActivity.this);

@@ -1,6 +1,9 @@
 package com.github.florent37.materialviewpager.sample.fragment;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.location.SettingInjectorService;
 import android.os.Bundle;
@@ -15,10 +18,22 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 import com.github.florent37.materialviewpager.header.MaterialViewPagerHeaderDecorator;
+import com.github.florent37.materialviewpager.sample.LoginActivity;
+import com.github.florent37.materialviewpager.sample.MainActivity;
+import com.github.florent37.materialviewpager.sample.OnItemClick;
 import com.github.florent37.materialviewpager.sample.R;
 import com.github.florent37.materialviewpager.sample.SettingsAdapter;
 import com.github.florent37.materialviewpager.sample.TestRecyclerViewAdapter;
+import com.github.florent37.materialviewpager.sample.UpdateRequest;
+import com.github.florent37.materialviewpager.sample.UserAreaActivity;
+import com.github.florent37.materialviewpager.sample.Variable;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +41,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends Fragment implements OnItemClick {
 
     private static final boolean GRID_LAYOUT = false;
     private static final int ITEM_COUNT = 1;
@@ -34,7 +49,8 @@ public class SettingsFragment extends Fragment {
 
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
-
+    Variable variable;
+    Context context;
     public static SettingsFragment newInstance() { return new SettingsFragment(); }
 
     @Nullable
@@ -69,15 +85,14 @@ public class SettingsFragment extends Fragment {
 
         //Use this now
         mRecyclerView.addItemDecoration(new MaterialViewPagerHeaderDecorator());
-        mRecyclerView.setAdapter(new SettingsAdapter(items));
-       /* editbutton = (Button)mRecyclerView.findViewById(R.id.edit);
-        editbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Activity root = getActivity();
-                Toast.makeText(root,"hello!",Toast.LENGTH_LONG).show();
+        mRecyclerView.setAdapter(new SettingsAdapter(items,this));
+        context = getActivity();
 
-            }
-        });*/
     }
+
+    @Override
+    public void Refresh(){
+        ((MainActivity)getActivity()).refresh();//refresh fragment
+    }
+
 }
