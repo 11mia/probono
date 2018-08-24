@@ -51,8 +51,8 @@ public class SettingsFragment extends Fragment implements OnItemClick {
     RecyclerView mRecyclerView;
     Variable variable;
     Context context;
+    static Activity activity;
     public static SettingsFragment newInstance() { return new SettingsFragment(); }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -94,5 +94,12 @@ public class SettingsFragment extends Fragment implements OnItemClick {
     public void Refresh(){
         ((MainActivity)getActivity()).refresh();//refresh fragment
     }
+    /*
+    public void logout(){
+        activity = getActivity();
+        activity.finishAffinity();
 
+        // getActivity().finish();
+    }
+*/
 }

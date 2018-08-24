@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -47,6 +48,9 @@ public class SettingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     NumberPicker np;String sex="여";
     String area;
     OnItemClick onItemClick;
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+
     public SettingsAdapter(List<Object> contents, OnItemClick listener) {
         this.contents = contents;
         this.onItemClick=listener;
@@ -84,6 +88,36 @@ public class SettingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
                     }
                 });
+                final Context context1 = view.getContext();
+                pref = context1.getSharedPreferences("Login", Activity.MODE_PRIVATE);
+                editor = pref.edit();
+                Button button1=(Button)view.findViewById(R.id.logout);
+                button1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.v("test","button1 clicked!");
+                        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context1);
+                        builder.setMessage("어플리케이션이 종료됩니다.")
+                                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        editor.clear();
+                                        editor.commit();
+                                        //SettingsFragment.logout();
+                                        System.exit(0);
+                                    }
+                                })
+                                .setNegativeButton("취소",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            Toast.makeText(context1,"로그아웃이 취소되었습니다.",Toast.LENGTH_SHORT).show();
+                                        }
+                                })
+                                .create()
+                                .show();
+
+                    }
+                });
+
                 variable=(Variable) MainActivity.getapplication();
 
                 TextView tv_name = (TextView)view.findViewById(R.id.name);
