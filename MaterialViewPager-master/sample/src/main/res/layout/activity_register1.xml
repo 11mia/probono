@@ -48,6 +48,7 @@
         android:background="@color/white"
         android:hint="비밀번호"
         android:inputType="textPassword"
+        android:imeOptions="actionDone"
         android:padding="10dp"
         android:singleLine="true"
         android:textColor="@color/input_login"
@@ -106,7 +107,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.7"
-        android:privateImeOptions="defaultInputmode=english"/>
+        android:privateImeOptions="defaultInputmode=english"
+        android:imeOptions="actionDone"/>
 
         <!-- Login Button -->
 
@@ -198,7 +200,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="300dp"
+        android:layout_width="290dp"
         android:layout_height="45dp"
         android:orientation="horizontal"
         android:layout_marginBottom="8dp"
@@ -213,37 +215,59 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5">
-
-        <EditText
-            android:id="@+id/etAge"
-            android:layout_width="180dp"
+        <LinearLayout
+            android:layout_width="145dp"
             android:layout_height="45dp"
-            android:layout_marginRight="5dp"
-            android:background="@color/white"
-            android:hint="나이(숫자만)"
-            android:inputType="number"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:textColor="@color/input_login"
-            android:textColorHint="@color/input_login_hint"
+            android:orientation="horizontal"
+            android:layout_marginRight="5dp">
+            <TextView
+                android:id="@+id/etAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="나이 :"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+               />
+            <Spinner
+                android:id="@+id/agespinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"/>
+        </LinearLayout>
 
-           />
-        <EditText
-            android:id="@+id/etSex"
-            android:layout_width="110dp"
+        <LinearLayout
+            android:layout_width="150dp"
             android:layout_height="45dp"
-            android:layout_marginLeft="5dp"
-            android:background="@color/white"
-            android:hint="성별(여/남)"
-            android:inputType="text"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:textColor="@color/input_login"
-            android:textColorHint="@color/input_login_hint"
-            android:privateImeOptions="defaultInputmode=korean"
-            />
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="성별 :"
 
+                android:textSize="20sp"
+                android:layout_gravity="center"/>
+                <RadioGroup
+                    android:id="@+id/Gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center">
 
+                    <RadioButton
+                        android:id="@+id/Wm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="여"/>
+
+                    <RadioButton
+                        android:id="@+id/M"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="남"/>
+                </RadioGroup>
+        </LinearLayout>
     </LinearLayout>
 
 

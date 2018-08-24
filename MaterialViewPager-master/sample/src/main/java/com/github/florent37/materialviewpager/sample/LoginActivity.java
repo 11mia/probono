@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
                 LoginActivity.this.startActivity(registerIntent);
-                finish();
+                //finish();
             }
         });
 
@@ -45,7 +45,14 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final String username = etUsername.getText().toString();
                 final String password = etPassword.getText().toString();
-
+                if(username.equals("")||password.equals("")){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                    builder.setMessage("빈 칸이 존재합니다.")
+                            .setNegativeButton("확인", null)
+                            .create()
+                            .show();
+                    return;
+                }
                 // Response received from the server
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
@@ -72,16 +79,16 @@ public class LoginActivity extends AppCompatActivity {
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 LoginActivity.this.startActivity(intent);
                                 Toast toast = new Toast(LoginActivity.this);
-                                toast.makeText(LoginActivity.this,"welcome!",Toast.LENGTH_LONG).show();
+                                toast.makeText(LoginActivity.this,"환영합니다!",Toast.LENGTH_LONG).show();
                                 finish();
                             } else {
                                 Log.v("LoginActivity","LoginFailed");
-                                Toast toast = new Toast(LoginActivity.this);
-                                toast.makeText(LoginActivity.this,"login failed!",Toast.LENGTH_LONG).show();
+                                //Toast toast = new Toast(LoginActivity.this);
+                               // toast.makeText(LoginActivity.this,"login failed!",Toast.LENGTH_LONG).show();
                                 AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                                builder.setMessage("Login Failed")
-                                        .setTitle("Login Failed")
-                                        .setNegativeButton("Retry", null)
+                                builder.setMessage("올바른 아이디, 비밀번호를 입력하세요.")
+                                        .setTitle("로그인 실패")
+                                        .setNegativeButton("확인", null)
                                         .create()
                                         .show();
                             }

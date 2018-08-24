@@ -5,9 +5,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -20,14 +28,14 @@ import org.json.JSONObject;
 public class RegisterActivity extends AppCompatActivity {
     private boolean validate = false;
     private AlertDialog dialog;
-
+    int age=0;
+    String sex="여";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register1);
 
-        final EditText etAge = (EditText) findViewById(R.id.etAge);
         final EditText etName = (EditText) findViewById(R.id.etName);
         final EditText etUsername = (EditText) findViewById(R.id.etUsername);
         final EditText etPassword = (EditText) findViewById(R.id.etPassword);
@@ -35,7 +43,50 @@ public class RegisterActivity extends AppCompatActivity {
         final Button Link = (Button)findViewById(R.id.bLinkToLoginScreen);
         final EditText etAduino = (EditText)findViewById(R.id.etAduino);
         final EditText etSocial = (EditText)findViewById(R.id.etSocial);
-        final EditText etSex = (EditText)findViewById(R.id.etSex);
+
+
+        Spinner Main_spinner = (Spinner)findViewById(R.id.agespinner);
+
+        //스피너 어댑터 설정
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(this,R.array.age,android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Main_spinner.setAdapter(adapter);
+        Main_spinner.setSelection(39);
+
+
+        //스피너 이벤트 발생
+        Main_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                /// Toast.makeText(context, Integer.toString(position), Toast.LENGTH_SHORT).show();
+                age = position+1;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        RadioGroup rg   = (RadioGroup)this.findViewById(R.id.Gender);
+        RadioButton button1 = this.findViewById(R.id.Wm);
+        RadioButton button2 = this.findViewById(R.id.M);
+
+
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                //체크된 라디오버튼id가 checkedId에 자동으로 들어가있음
+                switch(checkedId){
+                    //선택된 라디오버튼에 해당하는 색상으로 글자색상바꾸기
+                    case R.id.Wm:
+                        sex = "여";break;
+                    case R.id.M:sex = "남";break;
+
+                }
+            }
+        });
+
 
 
         final Button validateButton = (Button)findViewById(R.id.bCheck);
@@ -117,16 +168,10 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final String name = etName.getText().toString();
                 final String username = etUsername.getText().toString();
-                final int age;
-                String strage=etAge.getText().toString();
-                if(strage.equals(""))
-                    age=-1;
-                else
-                    age=Integer.parseInt(strage);
+
                 final String password = etPassword.getText().toString();
                 final String aduino=etAduino.getText().toString();
                 final String social=etSocial.getText().toString();
-                final String sex = etSex.getText().toString();
                 //ID 중복체크를 했는지 확인함
                 if(!validate){
                     AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
@@ -136,7 +181,7 @@ public class RegisterActivity extends AppCompatActivity {
                     dialog.show();
                     return;
                 }
-                if(name.equals("")||username.equals("")||age==-1||password.equals("")||sex.equals("")){
+                if(name.equals("")||username.equals("")||age==0||password.equals("")||sex.equals("")){
                     AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                     dialog = builder.setMessage("빈 칸이 존재합니다.")
                             .setNegativeButton("확인", null)
@@ -174,5 +219,11 @@ public class RegisterActivity extends AppCompatActivity {
                 queue.add(registerRequest);
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+                super.onBackPressed();
+                finish();
+          
     }
 }
