@@ -26,7 +26,7 @@ import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
     CheckBox autoLogin;
-    Boolean loginChecked;
+    Boolean loginChecked=false;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     String username;
@@ -49,8 +49,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 InputMethodManager immhide = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-                immhide.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-
+                immhide.hideSoftInputFromWindow(etPassword.getWindowToken(),0);
+                
                 if (isChecked) {
                     loginChecked = true;
                 } else {
@@ -59,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
                     editor.clear();
                     editor.commit();
                 }
+
             }
         });
 
@@ -77,14 +78,6 @@ public class LoginActivity extends AppCompatActivity {
                         boolean success = jsonResponse.getBoolean("success");
 
                         if (success) {
-                            if (loginChecked) {
-                                // if autoLogin Checked, save values
-                                editor.putString("id", username);
-                                editor.putString("pw", password);
-                                editor.putBoolean("autoLogin", true);
-                                editor.commit();
-                            }
-
 
                             Log.v("LoginActivity", "LoginSuccess");
                             String name = jsonResponse.getString("name");
@@ -98,17 +91,13 @@ public class LoginActivity extends AppCompatActivity {
                             variable.setAge(age);
                             variable.setAduino_id(aduino_id);
                             variable.setSex(sex);
-                            //Toast.makeText(LoginActivity.this, variable.getName()+"   "+variable.getUsername()+"   "+variable.getAduino_id()+"   "+Integer.toString(variable.getAge()), Toast.LENGTH_LONG).show();
-                            //Toast.makeText(LoginActivity.this,username+"    "+name+"    "+Integer.toString(age),Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             LoginActivity.this.startActivity(intent);
                             Toast toast = new Toast(LoginActivity.this);
-                            toast.makeText(LoginActivity.this, "환영합니다!", Toast.LENGTH_LONG).show();
+                            toast.makeText(LoginActivity.this, "환영합니다!", Toast.LENGTH_SHORT).show();
                             finish();
                         } else {
                             Log.v("LoginActivity", "LoginFailed");
-                            //Toast toast = new Toast(LoginActivity.this);
-                            // toast.makeText(LoginActivity.this,"login failed!",Toast.LENGTH_LONG).show();
                             AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                             builder.setMessage("올바른 아이디, 비밀번호를 입력하세요.")
                                     .setTitle("로그인 실패")
@@ -134,7 +123,6 @@ public class LoginActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
                     LoginActivity.this.startActivity(registerIntent);
-                    //finish();
                 }
             });
 
@@ -181,17 +169,14 @@ public class LoginActivity extends AppCompatActivity {
                                     variable.setAge(age);
                                     variable.setAduino_id(aduino_id);
                                     variable.setSex(sex);
-                                    //Toast.makeText(LoginActivity.this, variable.getName()+"   "+variable.getUsername()+"   "+variable.getAduino_id()+"   "+Integer.toString(variable.getAge()), Toast.LENGTH_LONG).show();
-                                    //Toast.makeText(LoginActivity.this,username+"    "+name+"    "+Integer.toString(age),Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     LoginActivity.this.startActivity(intent);
                                     Toast toast = new Toast(LoginActivity.this);
-                                    toast.makeText(LoginActivity.this, "환영합니다!", Toast.LENGTH_LONG).show();
+                                    toast.makeText(LoginActivity.this, "환영합니다!", Toast.LENGTH_SHORT).show();
+
                                     finish();
                                 } else {
                                     Log.v("LoginActivity", "LoginFailed");
-                                    //Toast toast = new Toast(LoginActivity.this);
-                                    // toast.makeText(LoginActivity.this,"login failed!",Toast.LENGTH_LONG).show();
                                     AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                                     builder.setMessage("올바른 아이디, 비밀번호를 입력하세요.")
                                             .setTitle("로그인 실패")

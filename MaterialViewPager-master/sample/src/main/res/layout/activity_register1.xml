@@ -216,10 +216,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5">
         <LinearLayout
-            android:layout_width="145dp"
+            android:layout_width="150dp"
             android:layout_height="45dp"
             android:orientation="horizontal"
-            android:layout_marginRight="5dp">
+            android:layout_marginRight="0dp">
             <TextView
                 android:id="@+id/etAge"
                 android:layout_width="wrap_content"
