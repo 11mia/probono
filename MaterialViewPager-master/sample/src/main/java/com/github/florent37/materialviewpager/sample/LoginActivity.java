@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 InputMethodManager immhide = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
                 immhide.hideSoftInputFromWindow(etPassword.getWindowToken(),0);
-                
+
                 if (isChecked) {
                     loginChecked = true;
                 } else {

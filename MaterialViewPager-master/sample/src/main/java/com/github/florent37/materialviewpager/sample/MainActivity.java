@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -147,7 +148,11 @@ public class MainActivity extends DrawerActivity {
     long pressedTime = 0;
     @Override
     public void onBackPressed() {
-        if ( pressedTime == 0 ) {
+        DrawerLayout mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if(mDrawer.isDrawerOpen(GravityCompat.START))
+            mDrawer.closeDrawers();
+
+        else if ( pressedTime == 0 ) {
             Toast toast = Toast.makeText(MainActivity.this, " 한 번 더 누르면 종료됩니다." , Toast.LENGTH_SHORT);
             ViewGroup group = (ViewGroup) toast.getView();
             TextView messageTextView = (TextView) group.getChildAt(0);

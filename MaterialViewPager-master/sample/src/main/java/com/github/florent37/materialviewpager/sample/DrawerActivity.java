@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -314,7 +315,7 @@ public class DrawerActivity extends AppCompatActivity {
         builder.setPositiveButton("확인",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        mDrawer.closeDrawers();
+                        //mDrawer.closeDrawers();
                         Toast.makeText(context,"수정되었습니다.",Toast.LENGTH_LONG).show();
                         variable.setName(edName.getText().toString());
                         variable.setAge(np.getValue());
@@ -323,13 +324,25 @@ public class DrawerActivity extends AppCompatActivity {
                         //onItemClick.Refresh();  //refresh fragment
                         ((MainActivity)MainActivity.mContext).refresh();
                         UpdateDB(variable.getUsername(),variable.getName(),variable.getSex(),variable.getAge());//change db
+                        new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface d, int arg1) {
+                                d.cancel();
+                            };
+                        };
                     }
                 });
         builder.setNegativeButton("취소",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        mDrawer.closeDrawers();
+                       // mDrawer.closeDrawers();
                         Toast.makeText(context,"수정이 취소되었습니다.",Toast.LENGTH_LONG).show();
+                        new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface d, int arg1) {
+                                d.cancel();
+                            };
+                        };
                     }
                 });
         builder.show();
@@ -383,4 +396,5 @@ public class DrawerActivity extends AppCompatActivity {
                 .show();
 
     }
+
 }
