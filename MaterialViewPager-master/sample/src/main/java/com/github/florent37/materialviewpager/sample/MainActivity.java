@@ -1,35 +1,27 @@
 package com.github.florent37.materialviewpager.sample;
 
-import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.crashlytics.android.Crashlytics;
 import com.github.florent37.materialviewpager.MaterialViewPager;
 import com.github.florent37.materialviewpager.header.HeaderDesign;
-import com.github.florent37.materialviewpager.sample.fragment.RecyclerViewFragment;
+import com.github.florent37.materialviewpager.sample.fragment.MapFragment;
 import com.github.florent37.materialviewpager.sample.fragment.SettingsFragment;
-import com.github.florent37.materialviewpager.sample.fragment.coFragment;
 import com.github.florent37.materialviewpager.sample.fragment.purseFragment;
 import com.github.florent37.materialviewpager.sample.fragment.xiroFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends DrawerActivity {
     static Variable variable;
@@ -68,7 +60,7 @@ public class MainActivity extends DrawerActivity {
                     case 1:
                         return purseFragment.newInstance();
                     case 2:
-                        return coFragment.newInstance();
+                        return MapFragment.newInstance();
 
                     //case 1:
                     //    return RecyclerViewFragment.newInstance();
@@ -92,9 +84,9 @@ public class MainActivity extends DrawerActivity {
                     case 1:
                         return "Purse";
                     case 2:
-                        return "co";
+                        return "위치";
                     case 3:
-                        return "xiro";
+                        return "xir0";
                 }
                 return "";
             }

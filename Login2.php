@@ -20,10 +20,9 @@
         $response["age"] = $age;
         $response["username"] = $username;
         $response["password"] = $password;
-	$response["aduino_id"]=$aduino_id;
-	$response["sex"]=$sex;
+	      $response["aduino_id"]=$aduino_id;
+	      $response["sex"]=$sex;
     }
 
     echo json_encode($response);
 ?>
-
